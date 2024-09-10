@@ -1,0 +1,24 @@
+{
+  "questions": [
+    {
+      "question": "How does Save the Set work?",
+      "answer": "Copy the setlist.fm link of the playlist you want to save, then paste it into the URL bar above. Log in with your Spotify account, choose a name and description for your playlist and hit save! The playlist will then be visible for you to enjoy on your Spotify!"
+    },
+    {
+      "question": "Do I need a Spotify account to use this service? ",
+      "answer": "You will need to log in with a verified Spotify account in order to save the setlist to your account."
+    },
+    {
+      "question": "What permissions are used and what data do you store?",
+      "answer": "This service only uses the permissions needed to create and modify playlists. In order for this service to function, your Spotify User ID is stored along with any playlists you create. If you would like to remove any of your data that we have stored, you may do so using the data deletion process found in Settings."
+    },
+    {
+      "question": "I've found an issue! How do I report it?",
+      "answer": "Please drop me an email at hello@sionsmallman.com and I'll take a look!"
+    },
+    {
+      "question": "Is this service affiliated with Setlist.fm/Spotify?",
+      "answer": "This website/service is in no way affiliated with Setlist.fm or Spotify. This website was born out of a python script I have been running for years and that I decided to turn into a website for others to use as a hobby project."
+    }
+  ]
+}
