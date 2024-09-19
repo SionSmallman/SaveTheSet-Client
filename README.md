@@ -1,27 +1,24 @@
-# React + TypeScript + Vite
+# Save The Set - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**[sts.sionsmallman.com](https://sts.sionsmallman.com/)**
 
-Currently, two official plugins are available:
+| Main Page | Setlist customization page |
+| --- | --- | 
+| ![alt text](https://github.com/SionSmallman/SionSmallmanDotCom/blob/main/public/project-images/sts/1.png?raw=true) | ![alt text](https://github.com/SionSmallman/SionSmallmanDotCom/blob/main/public/project-images/sts/2.png?raw=true) |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+The frontend client of Save The Set, a web application for quickly and easily converting setlists from setlist.fm into Spotify playlists in the users account, with customization options.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
+- Quickly convert setlists from setlist.fm to Spotify playlists
+- Customize the titles, description, privacy settings of the playlist.
+- Edit the setlists to include what songs you'd like to include/exclude.
+- Authentication through Spotify using OAuth2.
 
-- Configure the top-level `parserOptions` property like this:
+## Stack
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+The frontend is built using **React** with **Typescript**. **Tailwind CSS** is used as a CSS framework. Hosted on Vercel.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Motivation
+
+This was initially a python script I used personally to prepare for gigs I attended. However, after discussing with some friends who also had the desire for a quick way to add setlist.fm setlists directly to Spotify, I decided to turn the project into a web application for them and others to use. 
