@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../components/LayoutComponents/Layout";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Success from "../components/SetlistEditPageComponents/Success";
@@ -9,6 +9,7 @@ import { Setlist, PlaylistFormData, Song } from "../components/SetlistEditPageCo
 import { SetlistContext } from "../context/SetlistContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import SonglistContainer from "../components/SetlistEditPageComponents/SonglistContainer";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 export default function SetlistPage() {
 
@@ -24,7 +25,7 @@ export default function SetlistPage() {
   // Get current user state from context
   const { state } = useAuthContext();
   const user = state.user;
-
+  const navigate = useNavigate();
   //FETCH: Get setlist data from API
   useEffect(() => {
     async function getSetlistData() {
@@ -32,7 +33,13 @@ export default function SetlistPage() {
         `${import.meta.env.VITE_SERVER_URL}/api/search?id=${sid}`,
         {},
       )
-        .then((data) => data.json())
+        .then((data) => {
+          if (!data.ok) {
+            setError("Error getting data from SetlistFM. Please check that the provided link is a valid setlist and try again.")
+            return;
+          }
+          return data.json()
+        })
         .catch((error) => {
           console.error("Fetch error: ", error);
           setError("An error has occured. Please try again later. " + error);
@@ -110,7 +117,16 @@ export default function SetlistPage() {
                         <p> Larger setlists may take longer to load.</p>
                       </>
                     ) : (
-                      <p>{error}</p>
+                      <>
+                        <p>{error}</p>
+                        <button
+                        id="success-home"
+                        onClick={() => navigate("/")}
+                        className="m-2 rounded-full bg-transparent bg-white p-2 font-bold text-gray-800 hover:bg-gray-200"
+                        >
+                        <IoArrowBackOutline className="inline" /> <span className="inline">Back</span>
+                        </button>
+                      </>
                     )}
                   </div>
                   )
