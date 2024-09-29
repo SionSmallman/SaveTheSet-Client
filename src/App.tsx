@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import SetlistPage from "./pages/SetlistPage";
 import RedirectWindow from "./pages/RedirectWindow";
 import UserSettings from "./pages/UserSettings";
+import UserHistory from "./pages/UserHistory";
 import NotFoundPage from "./pages/NotFound";
 
 function App() {
@@ -25,6 +26,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <UserSettings />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/history"
+                element={
+                  <ProtectedRoute>
+                    <UserHistory />
                   </ProtectedRoute>
                 }
               />
