@@ -6,9 +6,9 @@ function AccountSettings() {
 
   return (
     <>
-      <h2 className="text-center text-lg font-extrabold">Account Settings</h2>
+      <h1 className="text-center text-lg font-extrabold">Account Settings</h1>
       <div className="setting block">
-        <h3 className="text-lg font-bold text-red-500">Delete Account Data</h3>
+        <h2 className="text-lg font-bold text-red-500">Delete Account Data</h2>
         <p className="text-sm">
           This will remove any data that associated with your Spotify account
           from our database.
