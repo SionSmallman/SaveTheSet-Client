@@ -1,42 +1,26 @@
 import { useState, useEffect } from "react";
+import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from "../../components/LoadingSpinner";
 import RecentlySavedTile from "./RecentlySavedTile";
 import { PlaylistObject } from "./Interfaces/Home.interfaces";
 
 function RecentlySaved() {
-  const [recentlySavedPlaylists, setRecentlySavedPlaylists] = useState<
-    PlaylistObject[]
-  >([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {isPending, isSuccess, isError, data, error} = useQuery({
+    queryKey: ['recentlySaved'],
+    queryFn: () => fetch(`${import.meta.env.VITE_SERVER_URL}/api/playlists/recent`).then((response) => response.json()),
+  });
 
-  useEffect(() => {
-    async function getRecentlySaved() {
-      await fetch(`${import.meta.env.VITE_SERVER_URL}/api/playlists/recent`, {})
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          setRecentlySavedPlaylists(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error("Fetch error: ", error);
-        });
-    }
-    getRecentlySaved();
-  }, []);
-
+  // Loop through to display the recently saved setlists
   const [currentIndex, setCurrentIndex] = useState(0);
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Increment the index and loop back to the beginning if necessary
       setCurrentIndex(
-        (prevIndex) => (prevIndex + 1) % recentlySavedPlaylists.length,
+        (prevIndex) => (prevIndex + 1) % data.length,
       );
     }, 5000);
     return () => clearInterval(intervalId); // Cleanup the interval on component unmount
-  }, [recentlySavedPlaylists.length]);
+  }, [data]);
 
   return (
     <div id="recently-saved-container" className="m-auto h-full flex flex-col items-center justify-center py-5 md:w-[60vw] md:max-w-[1000px] md:flex-row" >
@@ -48,12 +32,11 @@ function RecentlySaved() {
           Trending setlists saved by other Save the Set users.
         </p>
       </div>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
+      {isPending && <LoadingSpinner />}
+      {isError && <p>{error.message}</p>}
+      {isSuccess &&
         <div className="w-1/2">
-          {recentlySavedPlaylists &&
-            recentlySavedPlaylists.map((playlist, index) => (
+          {data.map((playlist: PlaylistObject, index: number) => (
               <div
                 id="recently-saved-tile"
                 key={index}
@@ -65,7 +48,7 @@ function RecentlySaved() {
               </div>
             ))}
         </div>
-      )}
+      }
     </div>
   );
 }
