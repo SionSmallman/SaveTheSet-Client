@@ -13,13 +13,16 @@ function RecentlySaved() {
   // Loop through to display the recently saved setlists
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      // Increment the index and loop back to the beginning if necessary
-      setCurrentIndex(
-        (prevIndex) => (prevIndex + 1) % data.length,
-      );
-    }, 5000);
-    return () => clearInterval(intervalId); // Cleanup the interval on component unmount
+    if (isSuccess) {
+      const intervalId = setInterval(() => {
+        // Increment the index and loop back to the beginning if necessary
+        setCurrentIndex(
+          (prevIndex) => (prevIndex + 1) % data.length,
+        );
+      }, 5000);
+      // Cleanup the interval on component unmount
+      return () => clearInterval(intervalId); 
+    }
   }, [data]);
 
   return (
@@ -33,7 +36,9 @@ function RecentlySaved() {
         </p>
       </div>
       {isPending && <LoadingSpinner />}
-      {isError && <p>{error.message}</p>}
+      {isError && 
+          <p className="text-lgl text-white">{error.message}. This is likely due to the server cold starting (thanks Azure free tier!). Please wait 5 seconds then refresh the page!</p>
+      }
       {isSuccess &&
         <div className="w-1/2">
           {data.map((playlist: PlaylistObject, index: number) => (
